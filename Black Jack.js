@@ -1,5 +1,9 @@
 let firstCard = 11
 let secondCard = 9
+let cards = [
+    firstCard,  // 0
+    secondCard, // 1
+] // Array challenge 1
 let sum = firstCard + secondCard
 
 let hasBlackJack = false
@@ -19,7 +23,8 @@ function startGame () {
 
 function renderGame() {
 
-    cardsEl.textContent = "Cards:" + " " + firstCard + " " + secondCard 
+    console.log(cards) // Array challenge 2
+    cardsEl.textContent = "Cards:" + " " + cards[0] + " " + cards[1] 
     sumEl.textContent = "Sum:" + " " + sum
     if (sum <= 20) {
         message = "Do you want to draw a new card?"
@@ -44,7 +49,8 @@ function renderGame() {
 function newCard() {
     console.log("Drawing a new card from the deck")
     let add = 8
-    sum = firstCard + secondCard + add
+    cards.push(add)
+    sum = cards[0] + cards[1] + cards[2]
     console.log(renderGame())
 
 }
