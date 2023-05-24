@@ -1,5 +1,5 @@
-let firstCard = 11
-let secondCard = 9
+let firstCard = getRandomCard()
+let secondCard = getRandomCard()
 let cards = [
     firstCard,  // 0
     secondCard, // 1
@@ -14,6 +14,16 @@ let messageEl = document.getElementById("message-el")
 let cardsEl = document.querySelector("#cards-el")
 let sumEl =document.getElementById("sum-el")
 
+function getRandomCard (){
+    if (firstCard, secondCard, add === 1) {
+        return 11
+    } else if (firstCard, secondCard, add >= 11) {
+        return 10
+    }
+    return Math.floor((Math.random() * 13) + 1);
+}
+
+
 
 // console.log(sum)
 
@@ -24,7 +34,11 @@ function startGame () {
 function renderGame() {
 
     console.log(cards) // Array challenge 2
-    cardsEl.textContent = "Cards:" + " " + cards[0] + " " + cards[1] 
+    cardsEl.textContent = "Cards:" + " "
+    for (let i = 0 ; i < cards.length ; i ++ ) {
+    cardsEl.textContent += cards[i] + " "  
+    }
+    
     sumEl.textContent = "Sum:" + " " + sum
     if (sum <= 20) {
         message = "Do you want to draw a new card?"
@@ -48,7 +62,7 @@ function renderGame() {
 
 function newCard() {
     console.log("Drawing a new card from the deck")
-    let add = 8
+    let add = getRandomCard()
     cards.push(add)
     sum = cards[0] + cards[1] + cards[2]
     console.log(renderGame())
