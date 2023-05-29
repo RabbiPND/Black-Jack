@@ -1,9 +1,23 @@
-let player = {
-    name : "Rabbi",
-    chips : 100 
+let playerName = "";
+
+while (playerName === "") {
+  playerName = prompt("Please enter your name:");
+
+  if (playerName === null) {
+    break;
+  }
 }
 
-let cards = [] // Array challenge 1
+if (playerName !== "") {
+  console.log("Hello, " + playerName + "! Let's start the game.");
+} else {
+  console.log("No name entered. Game cannot start.");
+}
+
+
+let chipsCount = 100;
+
+let cards = []
 let sum = 0
 
 let hasBlackJack = false
@@ -29,21 +43,33 @@ function getRandomCard (){
 }
 
 
-
 // console.log(sum)
 
 function startGame () {
     isAlive = true
+    chipsCount -= 5
     let firstCard = getRandomCard()
     let secondCard = getRandomCard()
     cards = [firstCard, secondCard]
     sum = firstCard + secondCard
+
+    
+    chipsCount -= 10;
+
+    if (chipsCount >= 0) {
+        playerEl.textContent = playerName + ": R" + chipsCount;
+        console.log("Starting a new game. Remaining chips: " + chipsCount);
+      } else {
+        console.log("Not enough chips to start a new game.");
+      }    
+
+
     renderGame()
 }
 
 function renderGame() {
 
-    console.log(cards) // Array challenge 2
+    console.log(cards)
     cardsEl.textContent = "Cards:" + " "
     for (let i = 0 ; i < cards.length ; i ++ ) {
     cardsEl.textContent += cards[i] + " "  
@@ -62,11 +88,6 @@ function renderGame() {
 
     messageEl.textContent = message
     
-    // Cash-Out:
-    // console.log(hasBlackJack)
-    // console.log(isAlive)
-    
-    // console.log(message)
 }
 
 
@@ -79,7 +100,3 @@ function newCard() {
         renderGame()
     }
 }
-
-playerEl.textContent = player.name + ": R" + player.chips
-
-// let playerEl = document.querySelector("#player-el")

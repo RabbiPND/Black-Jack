@@ -1,5 +1,5 @@
 body{
-    background-image: url(game.jpg);
+    background-image: url(real.jpg);
     background-size: cover;
     text-align: center;
     display: flex;
@@ -20,8 +20,10 @@ h1{
 }
 
 p{
-    color: aliceblue;
+    color: rgb(9, 235, 20);
     font-size: 20px;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px green;
 }
 
 button{
