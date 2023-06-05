@@ -57,7 +57,7 @@ function startGame () {
     chipsCount -= 10;
 
     if (chipsCount >= 0) {
-        playerEl.textContent = playerName + ": R" + chipsCount;
+        playerEl.textContent = playerName + " : R" + chipsCount;
         console.log("Starting a new game. Remaining chips: " + chipsCount);
       } else {
         console.log("Not enough chips to start a new game.");
