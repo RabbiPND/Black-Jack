@@ -9,7 +9,7 @@ while (playerName === "") {
 }
 
 if (playerName !== "") {
-  console.log("Hello, " + playerName + "! Let's start the game.");
+  console.log("Hello, " + playerName.charAt(0).toUpperCase() + playerName.slice(1) + "! Let's start the game.");
 } else {
   console.log("No name entered. Game cannot start.");
 }
@@ -57,7 +57,7 @@ function startGame () {
     chipsCount -= 10;
 
     if (chipsCount >= 0) {
-        playerEl.textContent = playerName + " : R" + chipsCount;
+        playerEl.textContent = playerName.charAt(0).toUpperCase() + playerName.slice(1) + " : R" + chipsCount;
         console.log("Starting a new game. Remaining chips: " + chipsCount);
       } else {
         console.log("Not enough chips to start a new game.");
