@@ -100,3 +100,10 @@ function newCard() {
         renderGame()
     }
 }
+
+
+const start = document.querySelector('#start-game')
+start.addEventListener('click', startGame)
+
+const newC = document.querySelector('#new-card')
+newC.addEventListener('click', newCard)
