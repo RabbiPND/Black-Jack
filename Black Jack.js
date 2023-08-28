@@ -16,7 +16,6 @@ if (playerName !== "") {
 
 
 let chipsCount = 100;
-
 let cards = []
 let sum = 0
 
@@ -47,7 +46,6 @@ function getRandomCard (){
 
 function startGame () {
     isAlive = true
-    chipsCount -= 5
     let firstCard = getRandomCard()
     let secondCard = getRandomCard()
     cards = [firstCard, secondCard]
@@ -56,16 +54,19 @@ function startGame () {
     
     chipsCount -= 10;
 
-    if (chipsCount >= 0) {
+    if (chipsCount >= 10) {
         playerEl.textContent = playerName.charAt(0).toUpperCase() + playerName.slice(1) + " : R" + chipsCount;
         console.log("Starting a new game. Remaining chips: " + chipsCount);
       } else {
         console.log("Not enough chips to start a new game.");
+        endGame()
       }    
 
 
     renderGame()
 }
+
+
 
 function renderGame() {
 
@@ -81,6 +82,7 @@ function renderGame() {
     } else if (sum === 21) {
         message = "Wohoo! You have got Blackjack!"
         hasBlackJack = true
+        startGame()
     } else {
         message = "You are out of the game"
         isAlive = false
@@ -99,6 +101,40 @@ function newCard() {
         sum += add
         renderGame()
     }
+}
+
+const body = document.body
+function endGame() {
+  clearInterval(renderGame); // Stop the game loop
+  document.getElementById('game-canvas').style.display = 'none'; // Hide the game
+
+  const ranOut = document.createElement('div')
+  ranOut.classList.add('ran-out')
+  ranOut.textContent = "You ran out of coins, please insert coins to start";
+  body.append(ranOut)
+
+  const reStart = document.createElement('button')
+  reStart.classList.add('re-start')
+  reStart.textContent = "Re-Start"
+  reStart.style.color =  "yellow"
+  body.append(reStart)
+
+  reStart.addEventListener('click', () => {
+    let chipsCount = parseInt(prompt('Please insert coin(s) to restart the game'))
+    
+    if(!isNaN(chipsCount) && chipsCount >= 10) {
+      console.log(`You entered ${chipsCount}`);
+      ranOut.remove()
+      reStart.remove()
+
+      document.getElementById('game-canvas').style.display = 'block'
+      // startGame()
+      
+     } 
+     else {
+        alert('Please insert 10 or more coins')
+    }
+  })
 }
 
 
