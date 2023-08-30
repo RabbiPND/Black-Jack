@@ -27,6 +27,7 @@ let messageEl = document.getElementById("message-el")
 let cardsEl = document.querySelector("#cards-el")
 let sumEl =document.getElementById("sum-el")
 let playerEl = document.querySelector("#player-el")
+const body = document.body
 
 console.log(cards)
 
@@ -40,9 +41,6 @@ function getRandomCard (){
         return randomNumber
     }
 }
-
-
-// console.log(sum)
 
 function startGame () {
     isAlive = true
@@ -80,9 +78,31 @@ function renderGame() {
     if (sum <= 20) {
         message = "Do you want to draw a new card?"
     } else if (sum === 21) {
-        message = "Wohoo! You have got Blackjack!"
         hasBlackJack = true
-        startGame()
+        document.getElementById('game-canvas').style.display = 'none'
+        const winMessage = document.createElement('div')
+        winMessage.classList.add('win-message')
+        winMessage.textContent = "Wohoo! You have got Blackjack!"
+        winMessage.style.color = "goldenrod"
+        winMessage.style.border = "2px solid white"
+        winMessage.style.padding = "20px"
+        winMessage.style.backgroundColor = "white"
+        winMessage.style.fontWeight = "bold"
+        body.append(winMessage)
+
+        const playAgain = document.createElement('button')
+        playAgain.classList.add('play-again')
+        playAgain.textContent = "Play Again"
+        playAgain.style.color ="yellow"
+        body.append(playAgain)
+
+        playAgain.addEventListener('click', () => {
+          document.querySelector('.play-again').addEventListener('click', function(){
+            window.location.reload();
+            return false; 
+        })
+      })
+        
     } else {
         message = "You are out of the game"
         isAlive = false
@@ -103,14 +123,18 @@ function newCard() {
     }
 }
 
-const body = document.body
 function endGame() {
   clearInterval(renderGame); // Stop the game loop
   document.getElementById('game-canvas').style.display = 'none'; // Hide the game
 
   const ranOut = document.createElement('div')
   ranOut.classList.add('ran-out')
-  ranOut.textContent = "You ran out of coins, please insert coins to start";
+  ranOut.textContent = "Oops! You lost this game of Black Jack. Better luck next time!";
+  ranOut.style.color = "goldenrod"
+  ranOut.style.border = "2px solid white"
+  ranOut.style.padding = "20px"
+  ranOut.style.backgroundColor = "white"
+  ranOut.style.fontWeight = "bold"
   body.append(ranOut)
 
   const reStart = document.createElement('button')
@@ -120,20 +144,10 @@ function endGame() {
   body.append(reStart)
 
   reStart.addEventListener('click', () => {
-    let chipsCount = parseInt(prompt('Please insert coin(s) to restart the game'))
-    
-    if(!isNaN(chipsCount) && chipsCount >= 10) {
-      console.log(`You entered ${chipsCount}`);
-      ranOut.remove()
-      reStart.remove()
-
-      document.getElementById('game-canvas').style.display = 'block'
-      // startGame()
-      
-     } 
-     else {
-        alert('Please insert 10 or more coins')
-    }
+    document.querySelector('.re-start').addEventListener('click', function(){
+      window.location.reload();
+      return false;
+    })
   })
 }
 
